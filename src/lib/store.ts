@@ -76,12 +76,12 @@ interface AppState {
   getModuleById: (moduleId: string) => Module | undefined;
 }
 
-// Demo modules
+// Demo modules with complete data
 const DEMO_MODULES: Module[] = [
   {
     id: 'gmp-fundamentals',
     title: 'GMP Fundamentals',
-    description: 'Learn the basics of Good Manufacturing Practices',
+    description: 'Learn the basics of Good Manufacturing Practices including quality systems, documentation, and regulatory compliance.',
     type: 'video',
     category: 'GMP',
     prerequisites: [],
@@ -91,21 +91,41 @@ const DEMO_MODULES: Module[] = [
   {
     id: 'cfr-part-11',
     title: '21 CFR Part 11 Overview',
-    description: 'Electronic Records and Electronic Signatures',
+    description: 'Electronic Records and Electronic Signatures compliance requirements for FDA-regulated industries.',
     type: 'pdf',
     category: 'Regulatory',
     prerequisites: ['gmp-fundamentals'],
     hasQuiz: false,
     requiresSignature: true,
-    content: 'PDF content placeholder for 21 CFR Part 11 training material...'
+    content: 'This comprehensive guide covers all aspects of 21 CFR Part 11 compliance including system validation, audit trails, electronic signatures, and record retention requirements.'
   },
   {
     id: 'deviations-capa',
     title: 'Deviations & CAPA',
-    description: 'Corrective and Preventive Action procedures',
+    description: 'Corrective and Preventive Action procedures for handling quality deviations and implementing effective CAPA systems.',
     type: 'scorm',
     category: 'Quality',
     prerequisites: ['gmp-fundamentals'],
+    hasQuiz: true,
+    requiresSignature: true
+  },
+  {
+    id: 'data-integrity',
+    title: 'Data Integrity Principles',
+    description: 'ALCOA+ principles and best practices for maintaining data integrity in GxP environments.',
+    type: 'video',
+    category: 'Quality',
+    prerequisites: ['gmp-fundamentals', 'cfr-part-11'],
+    hasQuiz: true,
+    requiresSignature: true
+  },
+  {
+    id: 'validation-basics',
+    title: 'Computer System Validation',
+    description: 'Introduction to CSV requirements, GAMP 5 guidelines, and validation lifecycle processes.',
+    type: 'pdf',
+    category: 'Validation',
+    prerequisites: ['cfr-part-11'],
     hasQuiz: true,
     requiresSignature: true
   }
