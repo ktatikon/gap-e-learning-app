@@ -1,25 +1,44 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Badge } from '@/components/ui/badge';
-import { useStore } from '@/lib/store';
-import { useToast } from '@/hooks/use-toast';
-import { DEMO_USERS } from '@/lib/auth';
-import { Users, Plus, Trash2, BookOpen } from 'lucide-react';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
+import { useStore } from "@/lib/store";
+import { useToast } from "@/hooks/use-toast";
+import { DEMO_USERS } from "@/lib/auth";
+import { Users, Plus, Trash2, BookOpen } from "lucide-react";
 
 export default function UserManagement() {
-  const [selectedUser, setSelectedUser] = useState('');
-  const [selectedModule, setSelectedModule] = useState('');
+  const [selectedUser, setSelectedUser] = useState("");
+  const [selectedModule, setSelectedModule] = useState("");
   const [newUserData, setNewUserData] = useState({
-    name: '',
-    email: '',
-    role: 'student'
+    name: "",
+    email: "",
+    role: "student",
   });
-  
+
   const { modules } = useStore();
   const { toast } = useToast();
 
@@ -37,8 +56,8 @@ export default function UserManagement() {
       title: "User Added",
       description: `${newUserData.name} has been added successfully.`,
     });
-    
-    setNewUserData({ name: '', email: '', role: 'student' });
+
+    setNewUserData({ name: "", email: "", role: "student" });
   };
 
   const handleAssignTraining = () => {
@@ -51,20 +70,20 @@ export default function UserManagement() {
       return;
     }
 
-    const user = DEMO_USERS.find(u => u.id === selectedUser);
-    const module = modules.find(m => m.id === selectedModule);
-    
+    const user = DEMO_USERS.find((u) => u.id === selectedUser);
+    const module = modules.find((m) => m.id === selectedModule);
+
     toast({
       title: "Training Assigned",
       description: `${module?.title} has been assigned to ${user?.name}.`,
     });
-    
-    setSelectedUser('');
-    setSelectedModule('');
+
+    setSelectedUser("");
+    setSelectedModule("");
   };
 
   const handleRemoveUser = (userId: string) => {
-    const user = DEMO_USERS.find(u => u.id === userId);
+    const user = DEMO_USERS.find((u) => u.id === userId);
     toast({
       title: "User Removed",
       description: `${user?.name} has been removed from the system.`,
@@ -75,7 +94,9 @@ export default function UserManagement() {
     <div className="space-y-6">
       {/* Header */}
       <div className="gxp-card">
-        <h1 className="text-3xl font-bold text-foreground mb-2">User Management</h1>
+        <h1 className="text-3xl font-bold text-foreground mb-2">
+          User Management
+        </h1>
         <p className="text-muted-foreground">
           Manage users, assign training, and monitor user access.
         </p>
@@ -98,7 +119,9 @@ export default function UserManagement() {
               <Input
                 id="name"
                 value={newUserData.name}
-                onChange={(e) => setNewUserData(prev => ({ ...prev, name: e.target.value }))}
+                onChange={(e) =>
+                  setNewUserData((prev) => ({ ...prev, name: e.target.value }))
+                }
                 placeholder="Enter full name"
               />
             </div>
@@ -108,15 +131,19 @@ export default function UserManagement() {
                 id="email"
                 type="email"
                 value={newUserData.email}
-                onChange={(e) => setNewUserData(prev => ({ ...prev, email: e.target.value }))}
+                onChange={(e) =>
+                  setNewUserData((prev) => ({ ...prev, email: e.target.value }))
+                }
                 placeholder="Enter email address"
               />
             </div>
             <div>
               <Label htmlFor="role">Role</Label>
-              <Select 
-                value={newUserData.role} 
-                onValueChange={(value) => setNewUserData(prev => ({ ...prev, role: value }))}
+              <Select
+                value={newUserData.role}
+                onValueChange={(value) =>
+                  setNewUserData((prev) => ({ ...prev, role: value }))
+                }
               >
                 <SelectTrigger>
                   <SelectValue />
@@ -128,7 +155,10 @@ export default function UserManagement() {
                 </SelectContent>
               </Select>
             </div>
-            <Button onClick={handleAddUser} className="w-full gxp-button-primary">
+            <Button
+              onClick={handleAddUser}
+              className="w-full gxp-button-primary"
+            >
               Add User
             </Button>
           </CardContent>
@@ -151,7 +181,7 @@ export default function UserManagement() {
                   <SelectValue placeholder="Choose a user" />
                 </SelectTrigger>
                 <SelectContent>
-                  {DEMO_USERS.map(user => (
+                  {DEMO_USERS.map((user) => (
                     <SelectItem key={user.id} value={user.id}>
                       {user.name} ({user.role})
                     </SelectItem>
@@ -166,7 +196,7 @@ export default function UserManagement() {
                   <SelectValue placeholder="Choose a module" />
                 </SelectTrigger>
                 <SelectContent>
-                  {modules.map(module => (
+                  {modules.map((module) => (
                     <SelectItem key={module.id} value={module.id}>
                       {module.title}
                     </SelectItem>
@@ -174,7 +204,10 @@ export default function UserManagement() {
                 </SelectContent>
               </Select>
             </div>
-            <Button onClick={handleAssignTraining} className="w-full gxp-button-accent">
+            <Button
+              onClick={handleAssignTraining}
+              className="w-full gxp-button-accent"
+            >
               Assign Training
             </Button>
           </CardContent>
@@ -203,7 +236,7 @@ export default function UserManagement() {
                 </tr>
               </thead>
               <tbody>
-                {DEMO_USERS.map(user => (
+                {DEMO_USERS.map((user) => (
                   <tr key={user.id} className="border-b">
                     <td className="py-3">{user.name}</td>
                     <td className="py-3">{user.email}</td>
@@ -213,13 +246,16 @@ export default function UserManagement() {
                       </Badge>
                     </td>
                     <td className="py-3">
-                      <Badge variant="default" className="status-badge-completed">
+                      <Badge
+                        variant="default"
+                        className="status-badge-completed"
+                      >
                         Active
                       </Badge>
                     </td>
                     <td className="py-3">
-                      <Button 
-                        variant="destructive" 
+                      <Button
+                        variant="destructive"
                         size="sm"
                         onClick={() => handleRemoveUser(user.id)}
                       >

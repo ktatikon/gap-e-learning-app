@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { useStore } from '@/lib/store';
-import { Shield } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { useStore } from "@/lib/store";
+import { Shield } from "lucide-react";
 
 export default function AuditLogs() {
   const { auditLogs } = useStore();
@@ -10,7 +10,9 @@ export default function AuditLogs() {
     <div className="space-y-6">
       <div className="gxp-card">
         <h1 className="text-3xl font-bold text-foreground mb-2">Audit Logs</h1>
-        <p className="text-muted-foreground">Review system activities and compliance events.</p>
+        <p className="text-muted-foreground">
+          Review system activities and compliance events.
+        </p>
       </div>
 
       <Card>
@@ -38,9 +40,13 @@ export default function AuditLogs() {
               <tbody>
                 {auditLogs.map((log) => (
                   <tr key={log.id} className="border-b">
-                    <td className="py-2">{new Date(log.timestamp).toLocaleString()}</td>
-                    <td className="py-2">{log.action.replace('_', ' ').toUpperCase()}</td>
-                    <td className="py-2">{log.moduleId || 'System'}</td>
+                    <td className="py-2">
+                      {new Date(log.timestamp).toLocaleString()}
+                    </td>
+                    <td className="py-2">
+                      {log.action.replace("_", " ").toUpperCase()}
+                    </td>
+                    <td className="py-2">{log.moduleId || "System"}</td>
                     <td className="py-2">{log.userId}</td>
                     <td className="py-2 font-mono">{log.ipAddress}</td>
                   </tr>

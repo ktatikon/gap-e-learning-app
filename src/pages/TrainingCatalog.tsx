@@ -1,53 +1,76 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
-import { useStore } from '@/lib/store';
-import { useNavigate } from 'react-router-dom';
-import { Search, BookOpen, Play, Lock } from 'lucide-react';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { useStore } from "@/lib/store";
+import { useNavigate } from "react-router-dom";
+import { Search, BookOpen, Play, Lock } from "lucide-react";
 
 export default function TrainingCatalog() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [categoryFilter, setCategoryFilter] = useState('all');
-  const [prerequisiteFilter, setPrerequisiteFilter] = useState('all');
-  
+  const [searchTerm, setSearchTerm] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [prerequisiteFilter, setPrerequisiteFilter] = useState("all");
+
   const { user, modules, getUserProgress, getCompletedModules } = useStore();
   const navigate = useNavigate();
 
   if (!user) return null;
 
   const completedModules = getCompletedModules(user.id);
-  const completedModuleIds = completedModules.map(p => p.moduleId);
+  const completedModuleIds = completedModules.map((p) => p.moduleId);
 
-  const checkPrerequisites = (module: any) => {
-    return module.prerequisites.every((prereq: string) => completedModuleIds.includes(prereq));
+  const checkPrerequisites = (module: { prerequisites: string[] }) => {
+    return module.prerequisites.every((prereq: string) =>
+      completedModuleIds.includes(prereq)
+    );
   };
 
-  const filteredModules = modules.filter(module => {
-    const matchesSearch = module.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         module.description.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesCategory = categoryFilter === 'all' || module.category === categoryFilter;
-    
+  const filteredModules = modules.filter((module) => {
+    const matchesSearch =
+      module.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      module.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesCategory =
+      categoryFilter === "all" || module.category === categoryFilter;
+
     const prerequisitesMet = checkPrerequisites(module);
-    const matchesPrerequisites = prerequisiteFilter === 'all' ||
-                                (prerequisiteFilter === 'met' && prerequisitesMet) ||
-                                (prerequisiteFilter === 'not-met' && !prerequisitesMet);
-    
+    const matchesPrerequisites =
+      prerequisiteFilter === "all" ||
+      (prerequisiteFilter === "met" && prerequisitesMet) ||
+      (prerequisiteFilter === "not-met" && !prerequisitesMet);
+
     return matchesSearch && matchesCategory && matchesPrerequisites;
   });
 
-  const categories = ['all', ...Array.from(new Set(modules.map(m => m.category)))];
+  const categories = [
+    "all",
+    ...Array.from(new Set(modules.map((m) => m.category))),
+  ];
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="gxp-card">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Training Catalog</h1>
+        <h1 className="text-3xl font-bold text-foreground mb-2">
+          Training Catalog
+        </h1>
         <p className="text-muted-foreground">
-          Explore available training modules and continue your professional development.
+          Explore available training modules and continue your professional
+          development.
         </p>
       </div>
 
@@ -67,21 +90,24 @@ export default function TrainingCatalog() {
                 className="pl-10"
               />
             </div>
-            
+
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
               <SelectTrigger>
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
-                {categories.map(category => (
+                {categories.map((category) => (
                   <SelectItem key={category} value={category}>
-                    {category === 'all' ? 'All Categories' : category}
+                    {category === "all" ? "All Categories" : category}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-            
-            <Select value={prerequisiteFilter} onValueChange={setPrerequisiteFilter}>
+
+            <Select
+              value={prerequisiteFilter}
+              onValueChange={setPrerequisiteFilter}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Prerequisites" />
               </SelectTrigger>
@@ -100,7 +126,7 @@ export default function TrainingCatalog() {
         {filteredModules.map((module) => {
           const progress = getUserProgress(user.id, module.id);
           const prerequisitesMet = checkPrerequisites(module);
-          
+
           return (
             <Card key={module.id} className="flex flex-col">
               <CardHeader>
@@ -113,7 +139,7 @@ export default function TrainingCatalog() {
                   {module.description}
                 </CardDescription>
               </CardHeader>
-              
+
               <CardContent className="flex-1 space-y-4">
                 {/* Prerequisites */}
                 {module.prerequisites.length > 0 && (
@@ -121,7 +147,9 @@ export default function TrainingCatalog() {
                     <h4 className="text-sm font-medium mb-2">Prerequisites:</h4>
                     <div className="flex flex-wrap gap-1">
                       {module.prerequisites.map((prereq) => {
-                        const prereqModule = modules.find(m => m.id === prereq);
+                        const prereqModule = modules.find(
+                          (m) => m.id === prereq
+                        );
                         const isCompleted = completedModuleIds.includes(prereq);
                         return (
                           <Badge
@@ -141,7 +169,9 @@ export default function TrainingCatalog() {
                 <div className="flex gap-2 text-xs text-muted-foreground">
                   <span className="capitalize">{module.type} Content</span>
                   {module.hasQuiz && <span>• Quiz Included</span>}
-                  {module.requiresSignature && <span>• Signature Required</span>}
+                  {module.requiresSignature && (
+                    <span>• Signature Required</span>
+                  )}
                 </div>
 
                 {/* Action Button */}
@@ -162,8 +192,11 @@ export default function TrainingCatalog() {
                       onClick={() => navigate(`/module/${module.id}`)}
                     >
                       <Play className="h-4 w-4 mr-2" />
-                      {progress?.status === 'completed' ? 'Review' : 
-                       progress?.status === 'in-progress' ? 'Continue' : 'Start Training'}
+                      {progress?.status === "completed"
+                        ? "Review"
+                        : progress?.status === "in-progress"
+                        ? "Continue"
+                        : "Start Training"}
                     </Button>
                   )}
                 </div>
@@ -177,7 +210,9 @@ export default function TrainingCatalog() {
         <Card>
           <CardContent className="text-center py-12">
             <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-foreground mb-2">No training modules found</h3>
+            <h3 className="text-lg font-medium text-foreground mb-2">
+              No training modules found
+            </h3>
             <p className="text-muted-foreground">
               Try adjusting your search criteria or filters.
             </p>

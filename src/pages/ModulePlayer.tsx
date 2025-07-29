@@ -1,18 +1,25 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { useStore } from '@/lib/store';
-import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, ArrowRight, Save, PlayCircle, FileText, Monitor } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { useStore } from "@/lib/store";
+import { useToast } from "@/hooks/use-toast";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Save,
+  PlayCircle,
+  FileText,
+  Monitor,
+} from "lucide-react";
 
 export default function ModulePlayer() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user, getModuleById, getUserProgress, updateProgress } = useStore();
-  
+
   const [currentProgress, setCurrentProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -29,7 +36,7 @@ export default function ModulePlayer() {
     return (
       <div className="text-center py-12">
         <h2 className="text-xl font-semibold">Module not found</h2>
-        <Button onClick={() => navigate('/catalog')} className="mt-4">
+        <Button onClick={() => navigate("/catalog")} className="mt-4">
           Back to Catalog
         </Button>
       </div>
@@ -62,7 +69,7 @@ export default function ModulePlayer() {
 
   const getContentArea = () => {
     switch (module.type) {
-      case 'video':
+      case "video":
         return (
           <div className="aspect-video bg-black rounded-lg flex items-center justify-center">
             <div className="text-center text-white">
@@ -74,13 +81,13 @@ export default function ModulePlayer() {
                 variant="outline"
                 onClick={() => setIsPlaying(!isPlaying)}
               >
-                {isPlaying ? 'Pause' : 'Play'} Video
+                {isPlaying ? "Pause" : "Play"} Video
               </Button>
             </div>
           </div>
         );
-      
-      case 'pdf':
+
+      case "pdf":
         return (
           <div className="bg-gray-50 rounded-lg p-8 min-h-[400px]">
             <div className="text-center mb-6">
@@ -90,10 +97,13 @@ export default function ModulePlayer() {
             </div>
             <div className="prose max-w-none">
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h4 className="text-lg font-semibold mb-4">21 CFR Part 11 Overview</h4>
+                <h4 className="text-lg font-semibold mb-4">
+                  21 CFR Part 11 Overview
+                </h4>
                 <p className="mb-4">
-                  This regulation defines the requirements for electronic records and electronic signatures 
-                  in FDA-regulated industries. Key requirements include:
+                  This regulation defines the requirements for electronic
+                  records and electronic signatures in FDA-regulated industries.
+                  Key requirements include:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Validation of computerized systems</li>
@@ -103,30 +113,34 @@ export default function ModulePlayer() {
                   <li>System access controls</li>
                 </ul>
                 <p className="mt-4">
-                  {module.content || 'Additional content would be displayed here in a real implementation.'}
+                  {module.content ||
+                    "Additional content would be displayed here in a real implementation."}
                 </p>
               </div>
             </div>
           </div>
         );
-      
-      case 'scorm':
+
+      case "scorm":
         return (
           <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
             <div className="text-center">
               <Monitor className="h-16 w-16 mx-auto text-primary mb-4" />
               <h3 className="text-xl font-semibold mb-2">{module.title}</h3>
-              <p className="text-muted-foreground mb-4">SCORM Interactive Content</p>
+              <p className="text-muted-foreground mb-4">
+                SCORM Interactive Content
+              </p>
               <div className="bg-white p-4 rounded-lg shadow-sm">
                 <p className="text-sm text-gray-600">
                   SCORM package would be loaded here in a real implementation.
-                  This would provide interactive learning experiences with tracking.
+                  This would provide interactive learning experiences with
+                  tracking.
                 </p>
               </div>
             </div>
           </div>
         );
-      
+
       default:
         return <div>Unsupported content type</div>;
     }
@@ -136,7 +150,7 @@ export default function ModulePlayer() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <Button variant="outline" onClick={() => navigate('/catalog')}>
+        <Button variant="outline" onClick={() => navigate("/catalog")}>
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Catalog
         </Button>
@@ -151,7 +165,9 @@ export default function ModulePlayer() {
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             <span>Training Progress</span>
-            <span className="text-sm font-normal">{currentProgress}% Complete</span>
+            <span className="text-sm font-normal">
+              {currentProgress}% Complete
+            </span>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -161,9 +177,7 @@ export default function ModulePlayer() {
 
       {/* Content Area */}
       <Card>
-        <CardContent className="p-6">
-          {getContentArea()}
-        </CardContent>
+        <CardContent className="p-6">{getContentArea()}</CardContent>
       </Card>
 
       {/* Navigation Controls */}
@@ -184,7 +198,7 @@ export default function ModulePlayer() {
                 <Save className="h-4 w-4 mr-2" />
                 Save Progress
               </Button>
-              
+
               {module.hasQuiz && currentProgress >= 80 && (
                 <Button
                   onClick={() => navigate(`/module/${id}/quiz`)}
@@ -231,7 +245,9 @@ export default function ModulePlayer() {
             {module.requiresSignature && (
               <div>
                 <h4 className="font-medium mb-2">Completion</h4>
-                <p className="text-muted-foreground">Digital Signature Required</p>
+                <p className="text-muted-foreground">
+                  Digital Signature Required
+                </p>
               </div>
             )}
           </div>
