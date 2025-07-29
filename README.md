@@ -346,20 +346,8 @@ VITE_APP_VERSION=1.0.0
 - **Prettier** - Code formatting
 - **Conventional Commits** - Commit message standards
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
-
-For support and questions:
-
-- **Email**: support@gxplearninghub.com
-- **Documentation**: [docs.gxplearninghub.com](https://docs.gxplearninghub.com)
-- **Issues**: [GitHub Issues](https://github.com/your-repo/issues)
-
 ---
 
 **Built with ❤️ for GxP Compliance Training**
 
-_Last updated: December 2024_
+_Last updated: July 29, 2025_
