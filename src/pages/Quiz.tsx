@@ -22,7 +22,7 @@ const QUIZ_QUESTIONS: Record<string, Question[]> = {
       question: 'What does GMP stand for?',
       options: [
         'Good Manufacturing Practices',
-        'General Medical Procedures',
+        'General Medical Procedures', 
         'Global Marketing Principles',
         'Guaranteed Material Purity'
       ],
@@ -34,7 +34,7 @@ const QUIZ_QUESTIONS: Record<string, Question[]> = {
       options: [
         'Cost reduction',
         'Quality assurance',
-        'Speed of production',
+        'Speed of production', 
         'Market expansion'
       ],
       correctAnswer: 1
@@ -64,7 +64,7 @@ const QUIZ_QUESTIONS: Record<string, Question[]> = {
       correctAnswer: 0
     },
     {
-      id: '2',
+      id: '2', 
       question: 'When should a deviation be reported?',
       options: [
         'Only if it affects product quality',
@@ -79,9 +79,79 @@ const QUIZ_QUESTIONS: Record<string, Question[]> = {
       question: 'What is the primary goal of CAPA?',
       options: [
         'To punish employees',
-        'To prevent recurrence of problems',
+        'To prevent recurrence of problems', 
         'To increase documentation',
         'To slow down production'
+      ],
+      correctAnswer: 1
+    }
+  ],
+  'data-integrity': [
+    {
+      id: '1',
+      question: 'What does ALCOA+ stand for?',
+      options: [
+        'Attributable, Legible, Contemporaneous, Original, Accurate',
+        'Accurate, Lasting, Complete, Original, Available',
+        'Attributable, Legible, Complete, Original, Accessible',
+        'Available, Lasting, Contemporaneous, Original, Accurate'
+      ],
+      correctAnswer: 0
+    },
+    {
+      id: '2',
+      question: 'Which is NOT a principle of data integrity?',
+      options: [
+        'Data should be attributable',
+        'Data should be easily changeable',
+        'Data should be contemporaneous',
+        'Data should be original'
+      ],
+      correctAnswer: 1
+    },
+    {
+      id: '3',
+      question: 'What is the best practice for data backup?',
+      options: [
+        'Backup once per year',
+        'Only backup important data',
+        'Regular automated backups with verification',
+        'Manual backup when convenient'
+      ],
+      correctAnswer: 2
+    }
+  ],
+  'validation-basics': [
+    {
+      id: '1',
+      question: 'What does CSV stand for?',
+      options: [
+        'Computer System Validation',
+        'Computerized System Verification',
+        'Computer Software Validation',
+        'Critical System Verification'
+      ],
+      correctAnswer: 0
+    },
+    {
+      id: '2',
+      question: 'Which GAMP category represents custom applications?',
+      options: [
+        'Category 1',
+        'Category 3',
+        'Category 4',
+        'Category 5'
+      ],
+      correctAnswer: 3
+    },
+    {
+      id: '3',
+      question: 'What is the first phase of the validation lifecycle?',
+      options: [
+        'Installation Qualification',
+        'Planning',
+        'Operation Qualification',
+        'Performance Qualification'
       ],
       correctAnswer: 1
     }
