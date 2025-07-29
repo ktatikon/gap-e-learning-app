@@ -2,41 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* GxP LMS Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* GxP Color Palette */
+    --background: 220 14% 97%; /* #F9FAFB */
+    --foreground: 220 87% 6%; /* #111827 */
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 87% 6%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 87% 6%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 214 100% 40%; /* #0066CC */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 39% 11%; /* #1F2937 */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 162 73% 36%; /* #00B894 */
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 214 100% 40%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* GxP Specific Design Tokens */
+    --gxp-sidebar-width: 16rem;
+    --gxp-header-height: 4rem;
+    --gxp-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --gxp-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --gxp-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    
+    /* Status Colors */
+    --status-success: 142 76% 36%; /* Green */
+    --status-warning: 45 93% 47%; /* Yellow */
+    --status-error: 0 84% 60%; /* Red */
+    --status-info: 214 100% 40%; /* Blue */
+    
+    /* Progress Colors */
+    --progress-not-started: 220 9% 46%; /* Gray */
+    --progress-in-progress: 45 93% 47%; /* Orange */
+    --progress-completed: 142 76% 36%; /* Green */
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +117,46 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+  }
+
+  /* Custom utility classes for GxP LMS */
+  .gxp-card {
+    @apply bg-card rounded-xl shadow-sm border border-border p-6;
+  }
+
+  .gxp-button-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 transition-colors;
+  }
+
+  .gxp-button-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 transition-colors;
+  }
+
+  .gxp-button-accent {
+    @apply bg-accent text-accent-foreground hover:bg-accent/90 transition-colors;
+  }
+
+  .status-badge-not-started {
+    @apply bg-gray-100 text-gray-700 border-gray-300;
+  }
+
+  .status-badge-in-progress {
+    @apply bg-orange-100 text-orange-700 border-orange-300;
+  }
+
+  .status-badge-completed {
+    @apply bg-green-100 text-green-700 border-green-300;
+  }
+
+  .gxp-sidebar {
+    width: var(--gxp-sidebar-width);
+    height: 100vh;
+    @apply bg-card border-r border-border;
+  }
+
+  .gxp-header {
+    height: var(--gxp-header-height);
+    @apply bg-card border-b border-border;
   }
 }
