@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GxP LMS Premium Design System */
+
+@layer base {
+  :root {
+    /* Premium Color Palette */
+    --background: 220 14% 98%; /* Softer white */
+    --foreground: 220 87% 7%; /* Deep navy */
+    --card: 0 0% 100%;
+    --card-foreground: 220 87% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 87% 7%;
+    --primary: 214 100% 48%; /* Brighter blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 39% 15%; /* Richer dark */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 162 73% 36%; /* Emerald */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 214 100% 48%;
+    --radius: 1.1rem;
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-blur: 16px;
+    /* Shadows */
+    --gxp-shadow-sm: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
+    --gxp-shadow-md: 0 8px 24px -2px rgba(0, 0, 0, 0.08);
+    --gxp-shadow-lg: 0 16px 32px -4px rgba(0, 0, 0, 0.12);
+    /* Section Divider */
+    --section-divider: linear-gradient(
+      90deg,
+      rgba(0, 102, 204, 0.08),
+      rgba(0, 184, 148, 0.08)
+    );
+    /* Status Colors */
+    --status-success: 142 76% 36%;
+    --status-warning: 45 93% 47%;
+    --status-error: 0 84% 60%;
+    --status-info: 214 100% 48%;
+    /* Progress Colors */
+    --progress-not-started: 220 9% 46%;
+    --progress-in-progress: 45 93% 47%;
+    --progress-completed: 142 76% 36%;
+    /* Sidebar */
+    --sidebar-background: 220 39% 15%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 214 100% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 162 73% 36%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 6.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 8.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 8.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 100% 70%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 162 73% 36%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 220 39% 15%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 210 100% 70%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 162 73% 36%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 102, 204, 0.03) 0%,
+      rgba(0, 184, 148, 0.03) 100%
+    );
+    min-height: 100vh;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold tracking-tight;
+    letter-spacing: -0.01em;
+  }
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+  section {
+    @apply py-12 md:py-20;
+  }
+  .section-divider {
+    height: 2px;
+    background: var(--section-divider);
+    border-radius: 9999px;
+    margin: 2.5rem 0;
+  }
+  .gxp-card {
+    @apply bg-card rounded-2xl shadow-lg border border-border p-8;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    box-shadow: var(--gxp-shadow-md);
+    transition: box-shadow 0.2s;
+  }
+  .gxp-card:hover {
+    box-shadow: var(--gxp-shadow-lg);
+  }
+  .gxp-button-primary {
+    @apply bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold rounded-lg shadow-md hover:from-accent hover:to-primary transition-all;
+    box-shadow: 0 2px 8px 0 rgba(0, 102, 204, 0.08);
+  }
+  .gxp-button-secondary {
+    @apply bg-secondary text-secondary-foreground font-semibold rounded-lg shadow hover:bg-secondary/90 transition-all;
+  }
+  .gxp-button-accent {
+    @apply bg-accent text-accent-foreground font-semibold rounded-lg shadow hover:bg-accent/90 transition-all;
+  }
+  .status-badge-not-started {
+    @apply bg-gray-100 text-gray-700 border-gray-300 rounded-full px-3 py-1 font-medium;
+  }
+  .status-badge-in-progress {
+    @apply bg-orange-100 text-orange-700 border-orange-300 rounded-full px-3 py-1 font-medium;
+  }
+  .status-badge-completed {
+    @apply bg-green-100 text-green-700 border-green-300 rounded-full px-3 py-1 font-medium;
+  }
+  .gxp-sidebar {
+    width: var(--gxp-sidebar-width);
+    height: 100vh;
+    @apply bg-card border-r border-border shadow-lg flex flex-col justify-between;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 102, 204, 0.08) 0%,
+        rgba(0, 184, 148, 0.08) 100%
+      ),
+      var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+  }
+  .gxp-header {
+    height: var(--gxp-header-height);
+    @apply bg-card/80 border-b border-border shadow-sm flex items-center px-6;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+  }
+  .gxp-table {
+    @apply w-full rounded-xl overflow-hidden shadow border border-border bg-card;
+  }
+  .gxp-table th {
+    @apply bg-muted text-foreground font-semibold px-6 py-3 text-left;
+  }
+  .gxp-table td {
+    @apply px-6 py-4 border-b border-border;
+  }
+  .gxp-table tr:nth-child(even) td {
+    @apply bg-muted/50;
+  }
+  .gxp-table tr:hover td {
+    @apply bg-primary/5;
+    transition: background 0.2s;
+  }
+  .gxp-section-title {
+    @apply text-3xl font-bold mb-4 flex items-center gap-2;
+    letter-spacing: -0.01em;
+  }
+  .gxp-section-desc {
+    @apply text-lg text-muted-foreground mb-8;
+  }
+  .gxp-divider {
+    @apply my-8 border-t border-border;
+  }
+}
