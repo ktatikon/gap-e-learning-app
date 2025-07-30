@@ -139,14 +139,26 @@ GxP Learning Hub is a modern, enterprise-grade Learning Management System specif
 
 3. **Set up Supabase**
 
-   - Create a new project in Supabase
-   - Copy your project URL and anon key
-   - Create a `.env.local` file in the root directory:
+   **🔒 SECURITY NOTICE**: No credentials are hardcoded in this application.
 
-   ```env
-   VITE_SUPABASE_URL=your_supabase_project_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   - Create a new project in Supabase
+   - Copy your project URL and anon key from Settings > API
+   - Configure your environment:
+
+   ```bash
+   # Copy the example file
+   cp .env.example .env
+
+   # Edit .env with your actual Supabase credentials
    ```
+
+   Required variables in `.env`:
+   ```env
+   VITE_SUPABASE_URL=https://your-project-id.supabase.co
+   VITE_SUPABASE_ANON_KEY=your_actual_supabase_anon_key
+   ```
+
+   **⚠️ Never commit your `.env` file to version control!**
 
 4. **Initialize the database**
 
@@ -162,7 +174,30 @@ GxP Learning Hub is a modern, enterprise-grade Learning Management System specif
 
 6. **Access the application**
    - Open [http://localhost:5173](http://localhost:5173)
-   - Register a new account or use the demo login
+   - Register a new account or use the test accounts below
+
+### Test Accounts (Development Only)
+
+**⚠️ DEVELOPMENT ONLY**: These accounts bypass email verification and should NEVER be used in production.
+
+For development and testing, use these pre-configured accounts (password: `123456789`):
+
+- **Student**: `student@gxp.in` / `123456789`
+- **Admin**: `admin@gxp.in` / `123456789`
+- **Compliance**: `compliance@gxp.in` / `123456789`
+
+**Setup test accounts:**
+```bash
+npm run setup-test-accounts  # Development only - will refuse to run in production
+```
+
+### User Registration
+
+New users can register at `/signup` with:
+- Email verification required
+- Strong password requirements
+- Role-based access control
+- Rate limiting for security
 
 ### Available Scripts
 
@@ -379,12 +414,16 @@ npm run build
 
 ### **Environment Variables**
 
+**🔒 SECURITY REQUIREMENT**: All credentials must be configured via environment variables.
+
 For production deployment, set these environment variables:
 
 ```env
-VITE_SUPABASE_URL=your_production_supabase_url
+VITE_SUPABASE_URL=https://your-production-project.supabase.co
 VITE_SUPABASE_ANON_KEY=your_production_supabase_anon_key
 ```
+
+**⚠️ NEVER use development credentials in production!**
 
 ### **Supabase Production Setup**
 

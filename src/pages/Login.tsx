@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -195,6 +195,16 @@ export default function Login() {
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
+
+          {/* Signup Link */}
+          <div className="mt-4 text-center">
+            <p className="text-sm text-muted-foreground">
+              Don't have an account?{' '}
+              <Link to="/signup" className="text-primary hover:underline font-medium">
+                Create one here
+              </Link>
+            </p>
+          </div>
 
           <div className="mt-6 p-4 bg-muted rounded-lg">
             <p className="text-sm font-medium text-foreground mb-2">

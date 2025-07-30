@@ -7,6 +7,8 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { Layout } from "@/components/Layout";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import EmailVerification from "./pages/EmailVerification";
 import StudentDashboard from "./pages/StudentDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import ComplianceDashboard from "./pages/ComplianceDashboard";
@@ -40,6 +42,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/verify-email" element={<EmailVerification />} />
           <Route
             path="/unauthorized"
             element={
